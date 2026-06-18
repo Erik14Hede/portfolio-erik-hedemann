@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erik Hedemann — UX Writer & Linguist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #147a6f;
+    --teal-light: #e8f0ee;
+    --teal-mid: #1d9e75;
+    --teal-dark: #0f5c54;
+    --text: #1a1a1a;
+    --text-mid: #4a4a4a;
+    --text-muted: #6e6e6e;
+    --border: #c9d8d5;
+    --bg: #fafaf9;
+    --white: #ffffff;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,250,249,0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 56px;
+  }
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    letter-spacing: 0.03em;
+  }
+  .nav-links a:hover { color: var(--teal); text-decoration: none; }
+
+  /* HERO */
+  .hero {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 6vw, 3.8rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    max-width: 620px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero-bio {
+    font-size: 1.0625rem;
+    color: var(--text-mid);
+    max-width: 560px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .hero-meta-item::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--teal);
+    flex-shrink: 0;
+  }
+
+  /* BEFORE / AFTER DEMO */
+  .demo-section {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 2rem;
+  }
+  .demo-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .demo-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  .demo-heading {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.25;
+  }
+  .demo-sub {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+  .demo-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    width: fit-content;
+  }
+  .demo-tab {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: var(--white);
+    border: none;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    transition: background 0.15s, color 0.15s;
+  }
+  .demo-tab.active {
+    background: var(--teal);
+    color: var(--white);
+  }
+  .demo-tab:not(.active):hover { background: var(--teal-light); color: var(--teal); }
+  .demo-tab + .demo-tab { border-left: 1px solid var(--border); }
+  .demo-examples {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+  @media (max-width: 640px) {
+    .demo-examples { grid-template-columns: 1fr; }
+  }
+  .demo-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .demo-card-label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 0.625rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+    font-weight: 500;
+  }
+  .demo-card-body { padding: 1rem; }
+  .demo-state { display: none; }
+  .demo-state.visible { display: block; }
+
+  .ui-mock {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .ui-mock.error-state { border-color: #d96c6c; }
+  .ui-mock.error-state .ui-label { color: #a33; font-size: 0.8125rem; margin-top: 0.375rem; }
+  .ui-input-fake {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    background: var(--bg);
+    margin-bottom: 0.375rem;
+  }
+  .ui-input-fake.invalid { border-color: #d96c6c; }
+  .ui-btn-fake {
+    display: inline-block;
+    background: var(--teal);
+    color: white;
+    font-size: 0.8125rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 5px;
+    margin-top: 0.375rem;
+  }
+  .ui-empty-icon {
+    text-align: center;
+    padding: 0.5rem 0;
+    color: var(--border);
+    font-size: 2rem;
+    margin-bottom: 0.375rem;
+  }
+  .ui-title { font-weight: 500; font-size: 0.875rem; margin-bottom: 0.25rem; }
+  .ui-body { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.45; }
+
+  .before-note, .after-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.625rem;
+    padding: 0.375rem 0.5rem;
+    border-radius: 4px;
+    font-style: italic;
+  }
+  .before-note { background: #fff3f3; color: #8b3a3a; }
+  .after-note { background: var(--teal-light); color: var(--teal-dark); }
+
+  /* WORK / CASE STUDIES */
+  .section {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  .section-heading {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 3.5rem;
+    line-height: 1.2;
+  }
+
+  .case-study {
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .case-study:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .cs-header {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+  }
+  .cs-number {
+    font-family: var(--serif);
+    font-size: 3rem;
+    color: var(--teal-light);
+    line-height: 1;
+    font-weight: 600;
+    flex-shrink: 0;
+    width: 48px;
+    text-align: center;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 0.25rem 0;
+    background: var(--white);
+  }
+  .cs-meta { flex: 1; min-width: 240px; }
+  .cs-tag {
+    display: inline-block;
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--teal-light);
+    color: var(--teal-dark);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    margin-bottom: 0.625rem;
+    font-weight: 500;
+  }
+  .cs-title {
+    font-family: var(--serif);
+    font-size: 1.375rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.375rem;
+    line-height: 1.3;
+  }
+  .cs-company {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+  }
+  .cs-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  @media (max-width: 600px) {
+    .cs-body { grid-template-columns: 1fr; }
+  }
+  .cs-col h4 {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .cs-col p {
+    font-size: 0.9375rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+  .cs-details {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    border-left: 3px solid var(--teal);
+  }
+  .cs-details p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .cs-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-top: 1.25rem;
+  }
+  .skill-tag {
+    font-size: 0.75rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  /* ABOUT */
+  .about-section {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    padding: 5rem 2rem;
+  }
+  .about-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  @media (max-width: 600px) {
+    .about-inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  .about-text h2 {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
+  .about-text p {
+    font-size: 0.9375rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .skills-grid h3 {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.875rem;
+  }
+  .skill-row:last-child { border-bottom: none; }
+  .skill-name { color: var(--text); }
+  .skill-dots { display: flex; gap: 3px; }
+  .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--border);
+  }
+  .dot.filled { background: var(--teal); }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--teal);
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  .contact-inner { max-width: 520px; margin: 0 auto; }
+  .contact-section h2 {
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--white);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .contact-section p {
+    font-size: 0.9375rem;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 2rem;
+    line-height: 1.65;
+  }
+  .contact-links { display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 6px;
+    color: var(--white);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .contact-link:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: white;
+    text-decoration: none;
+  }
+  .contact-link.primary {
+    background: var(--white);
+    color: var(--teal);
+    border-color: transparent;
+  }
+  .contact-link.primary:hover { background: rgba(255,255,255,0.88); }
+
+  footer {
+    background: var(--teal-dark);
+    padding: 1.25rem 2rem;
+    text-align: center;
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Erik Hedemann</span>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">UX Writer &amp; Linguist</p>
+  <h1>Words that guide users forward. <em>Even when things go wrong.</em></h1>
+  <p class="hero-bio">
+    I write the copy that makes software feel human: microcopy, onboarding flows, error states, conversational AI. Currently at Staffbase SE in Berlin, where I shape the voice of an AI assistant used across enterprise HR platforms in 50+ languages.
+  </p>
+  <div class="hero-meta">
+    <span class="hero-meta-item">Berlin, Germany</span>
+    <span class="hero-meta-item">German · English · Spanish · Dutch</span>
+    <span class="hero-meta-item">MA Foreign Language Linguistics</span>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER DEMO -->
+<section class="demo-section">
+  <div class="demo-inner">
+    <p class="demo-label">The craft</p>
+    <h2 class="demo-heading">UX writing is the difference between confusion and clarity.</h2>
+    <p class="demo-sub">Three common moments, before and after.</p>
+
+    <div class="demo-tabs" role="tablist" aria-label="Toggle before/after">
+      <button class="demo-tab active" onclick="switchDemo('before')" role="tab" aria-selected="true">Before</button>
+      <button class="demo-tab" onclick="switchDemo('after')" role="tab" aria-selected="false">After</button>
+    </div>
+
+    <div class="demo-examples">
+
+      <!-- Example 1: Error state -->
+      <div class="demo-card">
+        <div class="demo-card-label">Form validation</div>
+        <div class="demo-card-body">
+          <div class="demo-state visible" id="before-1">
+            <div class="ui-mock error-state">
+              <div class="ui-input-fake invalid">user@</div>
+              <div class="ui-label">❌ Invalid input.</div>
+            </div>
+            <p class="before-note">Describes the error to the system, not to the person.</p>
+          </div>
+          <div class="demo-state" id="after-1">
+            <div class="ui-mock error-state">
+              <div class="ui-input-fake invalid">user@</div>
+              <div class="ui-label" style="color:#a33;">Email addresses look like name@example.com</div>
+            </div>
+            <p class="after-note">Shows what's expected instead of what's wrong.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 2: Empty state -->
+      <div class="demo-card">
+        <div class="demo-card-label">Empty state</div>
+        <div class="demo-card-body">
+          <div class="demo-state visible" id="before-2">
+            <div class="ui-mock">
+              <div class="ui-empty-icon">☐</div>
+              <div class="ui-title">No items.</div>
+              <div class="ui-body">There are no items to display.</div>
+            </div>
+            <p class="before-note">Restates the obvious. Offers no path forward.</p>
+          </div>
+          <div class="demo-state" id="after-2">
+            <div class="ui-mock">
+              <div class="ui-empty-icon">☐</div>
+              <div class="ui-title">Nothing here yet</div>
+              <div class="ui-body">Add your first task to get started — it takes about 30 seconds.</div>
+              <div class="ui-btn-fake">Add task</div>
+            </div>
+            <p class="after-note">Explains the state and opens the next step.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Example 3: Confirmation -->
+      <div class="demo-card">
+        <div class="demo-card-label">Destructive action</div>
+        <div class="demo-card-body">
+          <div class="demo-state visible" id="before-3">
+            <div class="ui-mock">
+              <div class="ui-title">Are you sure?</div>
+              <div class="ui-body">This action cannot be undone. Click OK to proceed.</div>
+              <div style="display:flex;gap:0.5rem;margin-top:0.5rem">
+                <div class="ui-btn-fake" style="background:#c0392b">OK</div>
+                <div class="ui-btn-fake" style="background:#666">Cancel</div>
+              </div>
+            </div>
+            <p class="before-note">"OK" and "Cancel" force the user to re-read the question to understand what each button does.</p>
+          </div>
+          <div class="demo-state" id="after-3">
+            <div class="ui-mock">
+              <div class="ui-title">Delete this project?</div>
+              <div class="ui-body">Your files and team access will be removed immediately. This cannot be undone.</div>
+              <div style="display:flex;gap:0.5rem;margin-top:0.5rem">
+                <div class="ui-btn-fake" style="background:#c0392b">Delete project</div>
+                <div class="ui-btn-fake" style="background:#888">Keep it</div>
+              </div>
+            </div>
+            <p class="after-note">The buttons answer the question. The consequence is specific, not just scary.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section class="section" id="work">
+  <p class="section-label">Selected work</p>
+  <h2 class="section-heading">Three projects that shaped how I think about language in products.</h2>
+
+  <!-- Case Study 1 -->
+  <article class="case-study reveal">
+    <div class="cs-header">
+      <div class="cs-number">01</div>
+      <div class="cs-meta">
+        <span class="cs-tag">Conversational AI · Microcopy · Voice &amp; Tone</span>
+        <h3 class="cs-title">Navigator — Voice for an AI assistant in enterprise HR</h3>
+        <p class="cs-company">Staffbase SE · Berlin · 2024–present</p>
+      </div>
+    </div>
+    <div class="cs-body">
+      <div class="cs-col">
+        <h4>The challenge</h4>
+        <p>Navigator is a conversational AI assistant embedded in an enterprise HR platform used by tens of thousands of employees. Writing for it meant finding a voice that feels trustworthy without being robotic, and clear without being oversimplified — across a user base that ranges from HR managers to frontline workers.</p>
+      </div>
+      <div class="cs-col">
+        <h4>My approach</h4>
+        <p>I defined the voice and tone framework for Navigator from the ground up, including how it handles uncertainty, partial answers, and handoffs to a human. Then I wrote and iterated on all conversational states — greetings, clarifications, errors, and fallbacks — working closely with Product, Design, and Engineering.</p>
+      </div>
+    </div>
+    <div class="cs-details">
+      <p>"Microcopy for AI assistants is mostly edge cases. The happy path takes care of itself. My job was making sure that when Navigator doesn't know something, it says so honestly and still moves the user forward."</p>
+    </div>
+    <div class="cs-skills">
+      <span class="skill-tag">Conversational UX</span>
+      <span class="skill-tag">Voice &amp; tone</span>
+      <span class="skill-tag">Figma</span>
+      <span class="skill-tag">Cross-functional collaboration</span>
+      <span class="skill-tag">Content strategy</span>
+      <span class="skill-tag">Localisation (50+ languages)</span>
+    </div>
+    <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;font-style:italic;">Screens not shown here due to NDA. Available to walk through in person.</p>
+  </article>
+
+  <!-- Case Study 2 -->
+  <article class="case-study reveal">
+    <div class="cs-header">
+      <div class="cs-number">02</div>
+      <div class="cs-meta">
+        <span class="cs-tag">Tool Design · Localisation · AI Prototyping</span>
+        <h3 class="cs-title">Figma CAT-tool plugin — bridging design and translation</h3>
+        <p class="cs-company">Master's thesis project · Universität Potsdam · 2024</p>
+      </div>
+    </div>
+    <div class="cs-body">
+      <div class="cs-col">
+        <h4>The challenge</h4>
+        <p>UX writers and translators work in fundamentally different environments. Content created in Figma loses its structure the moment it enters a CAT tool — strings get stripped of context, translators can't see how text fits in the interface, and the resulting handoff wastes time on both sides.</p>
+      </div>
+      <div class="cs-col">
+        <h4>My approach</h4>
+        <p>I prototyped a Figma plugin that bridges the two workflows: extracting strings with design context intact, passing them to a translation memory environment, and reimporting translated text in the correct layers. The project combined my background in CAT tools (SDL Trados, MemoQ) with hands-on AI prototyping.</p>
+      </div>
+    </div>
+    <div class="cs-details">
+      <p>"This project started from a real frustration I had every week at work. Writing copy in Figma and then manually re-entering it into a spreadsheet for translation felt like a problem nobody had bothered to solve yet. I built a version that did."</p>
+    </div>
+    <div class="cs-skills">
+      <span class="skill-tag">Figma plugins</span>
+      <span class="skill-tag">CAT tools</span>
+      <span class="skill-tag">SDL Trados</span>
+      <span class="skill-tag">MemoQ</span>
+      <span class="skill-tag">Translation memory</span>
+      <span class="skill-tag">AI prototyping</span>
+    </div>
+  </article>
+
+  <!-- Case Study 3 -->
+  <article class="case-study reveal">
+    <div class="cs-header">
+      <div class="cs-number">03</div>
+      <div class="cs-meta">
+        <span class="cs-tag">Content Design · AI Enablement · Workshop</span>
+        <h3 class="cs-title">AI literacy workshop for linguists — making tools approachable</h3>
+        <p class="cs-company">Universität Potsdam · 2025</p>
+      </div>
+    </div>
+    <div class="cs-body">
+      <div class="cs-col">
+        <h4>The challenge</h4>
+        <p>Linguistics students at the University of Potsdam were curious about AI tools but had no practical framework for using them thoughtfully. The audience ranged from students with strong technical instincts to those with none — designing content that worked across that gap was the real challenge.</p>
+      </div>
+      <div class="cs-col">
+        <h4>My approach</h4>
+        <p>I designed and delivered a hands-on workshop introducing prompt engineering and practical AI tool-building. The curriculum moved from concept to application in a single session: first establishing why language matters in AI interactions, then having participants write and iterate on prompts in real time.</p>
+      </div>
+    </div>
+    <div class="cs-details">
+      <p>"Teaching something you know well to people who are new to it is its own kind of UX writing problem. The content has to meet the user where they are, not where you'd like them to be. That meant rebuilding my own assumptions from the ground up."</p>
+    </div>
+    <div class="cs-skills">
+      <span class="skill-tag">Curriculum design</span>
+      <span class="skill-tag">Prompt engineering</span>
+      <span class="skill-tag">Workshop facilitation</span>
+      <span class="skill-tag">Content design</span>
+      <span class="skill-tag">AI literacy</span>
+    </div>
+  </article>
+
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <h2>Linguist first, UX writer by practice.</h2>
+      <p>I came to UX writing through linguistics and translation. After a Master's in Foreign Language Linguistics at the University of Potsdam and a Bachelor's in International Technical Communication at Magdeburg-Stendal, I spent several years translating and localising content across Dutch, English, and Spanish before moving into product writing.</p>
+      <p>That path gives me something most UX writers don't have: a structural understanding of how language actually works, not just how it sounds. I notice when a label creates the wrong mental model before users do.</p>
+      <p>I'm also a sworn translator for English and Spanish, accredited by the Regional Court of Potsdam — which means I hold myself to a standard of precision that goes beyond brand voice guidelines.</p>
+    </div>
+    <div class="skills-grid reveal">
+      <h3>Tools &amp; skills</h3>
+      <div class="skill-row">
+        <span class="skill-name">UX Writing</span>
+        <span class="skill-dots">
+          <span class="dot filled"></span><span class="dot filled"></span>
+          <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span>
+        </span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Figma</span>
+        <span class="skill-dots">
+          <span class="dot filled"></span><span class="dot filled"></span>
+          <span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span>
+        </span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">SDL Trados / MemoQ</span>
+        <span class="skill-dots">
+          <span class="dot filled"></span><span class="dot filled"></span>
+          <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span>
+        </span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">Localisation</span>
+        <span class="skill-dots">
+          <span class="dot filled"></span><span class="dot filled"></span>
+          <span class="dot filled"></span><span class="dot filled"></span><span class="dot filled"></span>
+        </span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">AI prototyping</span>
+        <span class="skill-dots">
+          <span class="dot filled"></span><span class="dot filled"></span>
+          <span class="dot filled"></span><span class="dot filled"></span><span class="dot"></span>
+        </span>
+      </div>
+      <div class="skill-row">
+        <span class="skill-name">NLP basics</span>
+        <span class="skill-dots">
+          <span class="dot filled"></span><span class="dot filled"></span>
+          <span class="dot filled"></span><span class="dot"></span><span class="dot"></span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <h2>Available from 1 August 2026.</h2>
+    <p>I'm looking for UX writing and content design roles in Berlin and Brandenburg, with a particular interest in teams working on AI products, localisation infrastructure, or complex knowledge domains.</p>
+    <div class="contact-links">
+      <a class="contact-link primary" href="mailto:erik.hedemann14@gmail.com">erik.hedemann14@gmail.com</a>
+      <a class="contact-link" href="https://www.linkedin.com/in/erik-hedemann" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Erik Hedemann · Berlin
+</footer>
+
+<script>
+function switchDemo(state) {
+  var tabs = document.querySelectorAll('.demo-tab');
+  tabs.forEach(function(t) {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  var activeTab = state === 'before' ? tabs[0] : tabs[1];
+  activeTab.classList.add('active');
+  activeTab.setAttribute('aria-selected', 'true');
+
+  for (var i = 1; i <= 3; i++) {
+    var before = document.getElementById('before-' + i);
+    var after = document.getElementById('after-' + i);
+    if (state === 'before') {
+      before.classList.add('visible');
+      after.classList.remove('visible');
+    } else {
+      after.classList.add('visible');
+      before.classList.remove('visible');
+    }
+  }
+}
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(function(el) {
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
