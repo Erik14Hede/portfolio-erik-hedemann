@@ -70,7 +70,7 @@
 
   /* HERO */
   .hero {
-    max-width: 780px;
+    max-width:850px;
     margin: 0 auto;
     padding: 6rem 2rem 4rem;
   }
@@ -123,7 +123,25 @@
     background: var(--teal);
     flex-shrink: 0;
   }
-
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+.hero-text { flex: 1; min-width: 0; }
+.hero-photo {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--teal-light);
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .hero-top { flex-direction: column-reverse; align-items: center; text-align: center; }
+  .hero-photo { width: 100px; height: 100px; }
+}
   /* BEFORE / AFTER DEMO */
   .demo-section {
     background: var(--white);
@@ -155,7 +173,7 @@
     font-size: 0.9375rem;
     color: var(--text-muted);
     margin-bottom: 2.5rem;
-    max-width: 480px;
+    max-width: 600px;
   }
   .demo-tabs {
     display: flex;
@@ -303,19 +321,21 @@
     flex-wrap: wrap;
   }
   .cs-number {
-    font-family: var(--serif);
-    font-size: 3rem;
-    color: var(--teal-light);
-    line-height: 1;
-    font-weight: 600;
-    flex-shrink: 0;
-    width: 48px;
-    text-align: center;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 0.25rem 0;
-    background: var(--white);
-  }
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  color: var(--teal);
+  line-height: 1;
+  font-weight: 600;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--white);
+}
   .cs-meta { flex: 1; min-width: 240px; }
   .cs-tag {
     display: inline-block;
@@ -531,15 +551,20 @@
 
 <!-- HERO -->
 <section class="hero">
-  <p class="hero-label">UX Writer &amp; Linguist</p>
-  <h1>Words that guide users forward. <em>Even when things go wrong.</em></h1>
+  <div class="hero-top">
+    <div class="hero-text">
+      <p class="hero-label">UX Writer &amp; Linguist</p>
+      <h1>Words that guide users forward. <em>Even when things go wrong.</em></h1>
+    </div>
+    <img src="portrait.png" alt="Erik Hedemann" class="hero-photo">
+  </div>
   <p class="hero-bio">
-    I write the copy that makes software feel human: microcopy, onboarding flows, error states, conversational AI. Currently at Staffbase SE in Berlin, where I shape the voice of an AI assistant used across enterprise HR platforms in 50+ languages.
+    I write the microcopy that makes software feel human: onboarding flows, error states, conversational AI. Currently at Staffbase SE in Berlin, where I shape the voice of our products used across enterprise HR platforms.
   </p>
   <div class="hero-meta">
     <span class="hero-meta-item">Berlin, Germany</span>
     <span class="hero-meta-item">German · English · Spanish · Dutch</span>
-    <span class="hero-meta-item">MA Foreign Language Linguistics</span>
+    <span class="hero-meta-item">M.A. Foreign Language Linguistics</span>
   </div>
 </section>
 
@@ -571,7 +596,7 @@
           <div class="demo-state" id="after-1">
             <div class="ui-mock error-state">
               <div class="ui-input-fake invalid">user@</div>
-              <div class="ui-label" style="color:#a33;">Email addresses look like name@example.com</div>
+              <div class="ui-label" style="color:#a33;">Use a format like name@example.com</div>
             </div>
             <p class="after-note">Shows what's expected instead of what's wrong.</p>
           </div>
@@ -584,7 +609,12 @@
         <div class="demo-card-body">
           <div class="demo-state visible" id="before-2">
             <div class="ui-mock">
-              <div class="ui-empty-icon">☐</div>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1.5" style="display:block;margin:0 auto 0.5rem;">
+  <rect x="5" y="3" width="14" height="18" rx="2"/>
+  <path d="M9 3h6v2a1 1 0 01-1 1H10a1 1 0 01-1-1V3z" fill="var(--border)" stroke="none"/>
+  <line x1="8" y1="11" x2="16" y2="11"/>
+  <line x1="8" y1="15" x2="13" y2="15"/>
+</svg>
               <div class="ui-title">No items.</div>
               <div class="ui-body">There are no items to display.</div>
             </div>
@@ -592,12 +622,17 @@
           </div>
           <div class="demo-state" id="after-2">
             <div class="ui-mock">
-              <div class="ui-empty-icon">☐</div>
-              <div class="ui-title">Nothing here yet</div>
-              <div class="ui-body">Add your first task to get started — it takes about 30 seconds.</div>
-              <div class="ui-btn-fake">Add task</div>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="1.5" style="display:block;margin:0 auto 0.5rem;">
+  <rect x="5" y="3" width="14" height="18" rx="2"/>
+  <path d="M9 3h6v2a1 1 0 01-1 1H10a1 1 0 01-1-1V3z" fill="var(--border)" stroke="none"/>
+  <line x1="8" y1="11" x2="16" y2="11"/>
+  <line x1="8" y1="15" x2="13" y2="15"/>
+</svg>
+              <div class="ui-title">No Tasks Created Yet</div>
+              <div class="ui-body">Add your first task to get started — it only takes about 30 seconds.</div>
+              <div class="ui-btn-fake">Add Task</div>
             </div>
-            <p class="after-note">Explains the state and opens the next step.</p>
+            <p class="after-note">Explains the state and offers the next action.</p>
           </div>
         </div>
       </div>
@@ -622,8 +657,8 @@
               <div class="ui-title">Delete this project?</div>
               <div class="ui-body">Your files and team access will be removed immediately. This cannot be undone.</div>
               <div style="display:flex;gap:0.5rem;margin-top:0.5rem">
-                <div class="ui-btn-fake" style="background:#c0392b">Delete project</div>
-                <div class="ui-btn-fake" style="background:#888">Keep it</div>
+                <div class="ui-btn-fake" style="background:#c0392b">Delete</div>
+                <div class="ui-btn-fake" style="background:#888">Cancel</div>
               </div>
             </div>
             <p class="after-note">The buttons answer the question. The consequence is specific, not just scary.</p>
@@ -646,14 +681,14 @@
       <div class="cs-number">01</div>
       <div class="cs-meta">
         <span class="cs-tag">Conversational AI · Microcopy · Voice &amp; Tone</span>
-        <h3 class="cs-title">Navigator — Voice for an AI assistant in enterprise HR</h3>
+        <h3 class="cs-title">Navigator — Voice for an AI assistant</h3>
         <p class="cs-company">Staffbase SE · Berlin · 2024–present</p>
       </div>
     </div>
     <div class="cs-body">
       <div class="cs-col">
         <h4>The challenge</h4>
-        <p>Navigator is a conversational AI assistant embedded in an enterprise HR platform used by tens of thousands of employees. Writing for it meant finding a voice that feels trustworthy without being robotic, and clear without being oversimplified — across a user base that ranges from HR managers to frontline workers.</p>
+        <p>Navigator is a conversational AI assistant embedded in an enterprise internal comms platform used by tens of thousands of employees. Writing for it meant finding a voice that feels trustworthy without being robotic, and clear without being oversimplified — across a user base that ranges from office staff to frontline workers.</p>
       </div>
       <div class="cs-col">
         <h4>My approach</h4>
@@ -671,7 +706,12 @@
       <span class="skill-tag">Content strategy</span>
       <span class="skill-tag">Localisation (50+ languages)</span>
     </div>
-    <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:1rem;font-style:italic;">Screens not shown here due to NDA. Available to walk through in person.</p>
+    <div style="margin-top:1.5rem;border-radius:10px;overflow:hidden;border:1px solid var(--border);">
+  <img src="Example-Navigator.png" alt="Navigator assistant example interface" style="display:block;width:100%;">
+</div>
+<p style="font-size:0.8125rem;color:var(--text-muted);margin-top:0.625rem;font-style:italic;">
+  Recreated example based on Staffbase's public product marketing, with an illustrative use case. Actual interface and customer content are confidential.
+</p>
   </article>
 
   <!-- Case Study 2 -->
@@ -687,7 +727,7 @@
     <div class="cs-body">
       <div class="cs-col">
         <h4>The challenge</h4>
-        <p>UX writers and translators work in fundamentally different environments. Content created in Figma loses its structure the moment it enters a CAT tool — strings get stripped of context, translators can't see how text fits in the interface, and the resulting handoff wastes time on both sides.</p>
+        <p>UX writers and translators work in fundamentally different environments. Content created in Figma loses its structure the moment it enters a CAT tool: strings get stripped of context, translators can't see how text fits in the interface, and the resulting handoff wastes time on both sides.</p>
       </div>
       <div class="cs-col">
         <h4>My approach</h4>
@@ -695,7 +735,7 @@
       </div>
     </div>
     <div class="cs-details">
-      <p>"This project started from a real frustration I had every week at work. Writing copy in Figma and then manually re-entering it into a spreadsheet for translation felt like a problem nobody had bothered to solve yet. I built a version that did."</p>
+      <p>"This project started from a real frustration I had every week at work. Writing copy in Figma and then constantly going to other places to check for consistency with other copy, making sure we're using the right terminology and following the styleguide, felt like a problem nobody had bothered to solve yet. I built a version that did."</p>
     </div>
     <div style="margin-top:1.5rem;border-radius:10px;overflow:hidden;border:1px solid var(--border);">
   <video
@@ -729,7 +769,7 @@
     <div class="cs-body">
       <div class="cs-col">
         <h4>The challenge</h4>
-        <p>Linguistics students at the University of Potsdam were curious about AI tools but had no practical framework for using them thoughtfully. The audience ranged from students with strong technical instincts to those with none — designing content that worked across that gap was the real challenge.</p>
+        <p>Linguistics students at the University of Potsdam were curious about AI tools but had no practical framework for using them thoughtfully. The audience ranged from students with strong technical instincts to those with none but I believe all of them learned something valuable they can use immediately.</p>
       </div>
       <div class="cs-col">
         <h4>My approach</h4>
@@ -766,9 +806,9 @@
   <div class="about-inner">
     <div class="about-text reveal">
       <h2>Linguist first, UX writer by practice.</h2>
-      <p>I came to UX writing through linguistics and translation. After a Master's in Foreign Language Linguistics at the University of Potsdam and a Bachelor's in International Technical Communication at Magdeburg-Stendal, I spent several years translating and localising content across Dutch, English, and Spanish before moving into product writing.</p>
+      <p>I came to UX writing through linguistics and translation. After a Master's in Foreign Language Linguistics at the University of Potsdam and a Bachelor's in International Technical Communication in Magdeburg, I spent several years translating and localising content across Dutch, English, and Spanish before moving into product writing.</p>
       <p>That path gives me something most UX writers don't have: a structural understanding of how language actually works, not just how it sounds. I notice when a label creates the wrong mental model before users do.</p>
-      <p>I'm also a sworn translator for English and Spanish, accredited by the Regional Court of Potsdam — which means I hold myself to a standard of precision that goes beyond brand voice guidelines.</p>
+      <p>I'm also a sworn translator for English and Spanish by the president of Regional Court of Potsdam. This means I hold myself to a standard of precision that goes beyond brand voice guidelines.</p>
     </div>
     <div class="skills-grid reveal">
       <h3>Tools &amp; skills</h3>
